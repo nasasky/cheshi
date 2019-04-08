@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+<style>
+	
+.first,
+.second,
+.third,
+.first li,
+.second li,
+.third li
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	background:0 0;
+	font-weight:400;
+	font-style:inherit;
+	font-family:inherit;
+	vertical-align:top;
+}
+
+
+.select-res span {
+	display: inline-block;
+	width:180px;
+	height:14px;
+	line-height:14px;
+	padding:7px 15px 7px 5px;
+	border:solid 1px #c0c0c0;
+	background:url(../img/select_box_bg.gif) no-repeat 190px center;
+	cursor: pointer;
+	color:#c2c2c2;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+}
+.select-res p {
+	float: left;
+    position: relative;
+    
+    height: 40px;
+    line-height: 40px;
+    font-size: 36px;
+   margin-bottom: 5px !important;
+    padding: 0 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 40px;
+}
+.select-res a {
+	position:absolute;
+	top:0;
+	right:0;
+	display: block;
+	width:35px;
+	height:35px;
+	background:url(img/close_btn.jpg) no-repeat center;
+	cursor:pointer;
+	background-size:100% 100%; 
+}
+.select-res input {
+	width:172px;
+	height:14px;
+	line-height:14px;
+	margin-left:4px;
+	padding:7px 5px;
+	border:solid 1px #c0c0c0;
+	color:#2c2c2c;
+}
+.select-res span.selected {
+	color:#626262;
+}
+.select-box {
+	border:solid 1px #B61421;
+	width: 90%;
+	/*height:230px;*/
+	padding:20px 20px 10px;
+	position:absolute;
+/* float: left; */
+left: 0px !important;
+/* top: 0px !important; */
+	display:none;
+	z-index: 1000 !important;
+	background: #fff;
+}
+.select-box .close-btn {
+	position:absolute;
+	right:5px;
+	top:5px;
+	height: 50px;
+	width: 50px;
+	cursor: pointer;
+}
+.select-box .wrap {
+	height:200px;
+	/*border:solid 1px #ddd;*/
+margin-top: 43px;
+}
+.select-box ul {
+	/* float:left; */
+	width: 100%;
+	height:200px;
+	overflow-y: scroll;
+}
+.select-box ul li {
+	/*height: 25px;
+    line-height: 25px;*/
+    padding: 0 10px;
+    font-size: 41px;
+    background: url(img/arr.gif) no-repeat 152px center;
+    color: #626262;
+    cursor: pointer;
+    margin-top: 12px;
+}
+.select-box ul li.selected {
+	background:url(img/arr_selected.gif) no-repeat 152px center #B61421;
+	color:#fff;
+}
+	
+</style>
+	<body>
+
+		<div class="zhuce-input-input">
+			<div class="select-res">
+				<div id="vbc" style="float:left;height:48px;">
+					<p style="width:100%;float:left;height:48px;line-height: 48px;color: #aaa;font-size:30px;">请选择</p>
+				</div>
+			</div>
+
+			<div class="select-box">
+				<span class="close-btn">
+				<img src="img/close_btn.jpg"  style="width: 100%;height: 100%;"/>
+				</span>
+				<div class="wrap">
+					<ul class="first" style="float:left;border-top: solid 2px #ddd; "></ul>
+					<ul class="second" style="float:left;border-top: solid 2px #ddd;margin-top: 5px;height: auto;"></ul>
+					<ul class="third" style="float:left;height: auto;border-top: solid 2px #ddd;margin-top: 5px;"></ul>
+				</div>
+			</div>
+		</div>
+
+	</body>
+<script src="js/jquery-1.12.2.min.js"></script>
+<script>
+	var dataJson = {
+		"option": [{
+			"id": "1",
+			"name": "请选择类型",
+			"child": [{
+				"id": "4",
+				"name": "建设单位",
+				"child": [{
+					"id": "12",
+					"name": "塑制平衡木"
+				}, {
+					"id": "13",
+					"name": "木质平衡木"
+				}, {
+					"id": "14",
+					"name": "独木桥"
+				}, {
+					"id": "15",
+					"name": "平衡步道"
+				}]
+			}, {
+				"id": "1057",
+				"name": "工程服务",
+				"child": [{
+					"id": "1063",
+					"name": "益智玩具"
+				}, {
+					"id": "1064",
+					"name": "感官玩具"
+				}, {
+					"id": "1065",
+					"name": "数学玩具"
+				}, {
+					"id": "1066",
+					"name": "手眼协调"
+				}, {
+					"id": "1067",
+					"name": "拼图玩具"
+				}, {
+					"id": "1068",
+					"name": "其他玩具"
+				}, {
+					"id": "1069",
+					"name": ""
+				}, {
+					"id": "1070",
+					"name": ""
+				}, {
+					"id": "1071",
+					"name": ""
+				}, {
+					"id": "1072",
+					"name": ""
+				}, {
+					"id": "1073",
+					"name": ""
+				}]
+			}, {
+				"id": "534",
+				"name": "工程材料",
+				"child": [{
+					"id": "555",
+					"name": "品牌策划"
+				}, {
+					"id": "556",
+					"name": "ＶＩ设计"
+				}, {
+					"id": "557",
+					"name": "招标设计"
+				}, {
+					"id": "558",
+					"name": "园区规划设计"
+				}, {
+					"id": "559",
+					"name": "装修设计"
+				}, {
+					"id": "560",
+					"name": "招标设计"
+				}, {
+					"id": "561",
+					"name": "园区规划设计"
+				}, {
+					"id": "562",
+					"name": "装修设计"
+				}, {
+					"id": "563",
+					"name": "招标设计"
+				}, {
+					"id": "564",
+					"name": "园区规划设计"
+				}, {
+					"id": "565",
+					"name": "装修设计"
+				}]
+			}]
+		}]
+	}
+	var l1 = 0,
+		l2 = 0;
+	var cname1, cname2, cname3;
+	var cid1, cid2, cid3;
+	var canClick = !0;
+	var canClose = !1;
+	$('.select-box').css({
+		left: $('.select-res').offset().left,
+		top: $('.select-res').offset().top + $('.select-res').outerHeight(true)
+	});
+	$($('.select-res')).on('click', function() {
+		$('.select-box').show();
+		if (canClick) {
+			$('ul', $('.select-box')).html('');
+			fillData();
+			canClick = !1;
+		}
+		document.getElementById("vbc").style.display = "none";
+	});
+	$('span', $('.select-box')).on("click", function() {
+		canClose ? $('.select-box').hide() : alert('请选择下级品类！');
+		canClick = !0;
+	});
+	
+	$('.select-res').on('click', 'a', function() {
+		$(this).parent().remove();
+		$('.select-box').css({
+			top: $('.select-res').offset().top + $('.select-res').outerHeight(true)
+		});
+	})
+	
+	$('ul.first', $('.select-box')).on('click', 'li', function() {
+		$(this).addClass('selected').siblings().removeClass('selected');
+		$('ul.third').html('');
+		fillData($(this).index());
+		l1 = $(this).index();
+		cname1 = $(this).text();
+		cid1 = $(this).attr('val');
+		canClose = !1;
+		$('input.cid', $('.select-res')).val(cid1);
+		$('input.cname', $('.select-res')).val(cname1);
+	});
+	$('ul.second', $('.select-box')).on('click', 'li', function() {
+		$(this).addClass('selected').siblings().removeClass('selected');
+		fillData(l1, $(this).index());
+		l2 = $(this).index();
+		cname2 = $(this).text();
+		cid2 = $(this).attr('val');
+		canClose = !1;
+		$('input.cid', $('.select-res')).val(cid1 + ',' + cid2);
+		$('input.cname', $('.select-res')).val(cname1 + ',' + cname2);
+	});
+	$('ul.third', $('.select-box')).on('click', 'li', function() {
+		$(this).addClass('selected').siblings().removeClass('selected');
+		cname3 = $(this).text();
+		cid3 = $(this).attr('val');
+		canClose = !0;
+		var hasExist = !1;
+		$('.select-res').find("p").each(function() {
+			if ($(this).text().split(' > ')[0] == cname3) hasExist = !0;
+		})
+		hasExist ? alert('所选品类已被添加！') : $('.select-res').append('<p>' +cname3 + '<a></a><input type="hidden" value="' + cid3 + '" name="cid[]" /><input type="hidden" value="' + cname3 + '" name="cname[]" /></p>');
+		$('.select-box').css({
+			top: $('.select-res').offset().top + $('.select-res').outerHeight(true)
+		});
+		$('input.cid', $('.select-res')).val(cid3);
+		$('input.cname', $('.select-res')).val(cname3);
+	});
+	
+	//填充级联数据
+	
+	function fillData(l1, l2) {
+		var temp_html = "";
+		if (typeof(dataJson.option) != 'undefined' && arguments.length == 0) {
+			$.each(dataJson.option, function(i, pro) {
+				temp_html += '<li val="' + pro.id + '">' + pro.name + '</li>';
+			});
+		} else if (typeof(dataJson.option[l1].child) != 'undefined' && arguments.length == 1) {
+			$.each(dataJson.option[l1].child, function(i, pro) {
+				temp_html += '<li val="' + pro.id + '">' + pro.name + '</li>';
+			});
+		} else if (typeof(dataJson.option[l1].child[l2].child) != 'undefined' && arguments.length == 2) {
+			$.each(dataJson.option[l1].child[l2].child, function(i, pro) {
+				temp_html += '<li val="' + pro.id + '">' + pro.name + '</li>';
+			});
+		}
+		$('.select-box ul:eq(' + arguments.length + ')').html(temp_html);
+	}
+	</script>
+
+</html>

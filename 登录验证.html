@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta http-equiv=content-type content="text/html;charset=utf-8">
+</head>
+<body>
+<form action="" method="post" onsubmit="return check(this)">
+<label id="msg" style="color:red;font-size:12pt;"></label>
+<br/>
+用户名:<input name="username"/>
+<br/>
+密 码:<input type="password" name="username"/>
+<br/>
+<input type="submit" value="提交"/>
+</form>
+</body>
+<script>
+function check(form){
+return (function(node){
+// 如果已经没有需要校验的子节点，则推出递归
+if(!node) return true;
+// 判断子节点类型，这里我们只需要校验text和password类型文本
+if(/((text)|(password))/i.test(node.type)){
+var isEmpty = node.value.length == 0;
+// 校验文本是否为空
+if(isEmpty){
+caution(node); return false;
+}
+}
+// 使用递归来遍历下一个节点
+return arguments.callee(node.nextSibling);
+})(form.firstChild);
+}
+function caution(node){
+document.getElementById("msg").innerHTML = "请填写账号";
+node.focus();
+}
+</script>
+</html> 

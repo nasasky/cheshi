@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style>
+			/* select2样式重设 */
+        .select2-container--default .select2-selection--multiple {
+            min-height: 28px;
+            background: #f5f5f5;
+            border-color: #bbb;
+            border-radius: 0;
+            line-height: 22px;
+        }
+        .select2-container--default.select2-container--focus .select2-selection--multiple{
+            overflow: auto;
+            max-height: 120px;
+            background: #fff;
+            border-color: #bbb;
+        }
+        .select2-container--default .select2-search--inline .select2-search__field {
+            margin-top: 0;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            overflow: hidden;
+            margin-top: 4px;
+            max-width: 100px;
+            height: 20px;
+            line-height: 20px;
+            text-overflow: ellipsis;
+        }
+        
+        .form-wrap {
+            margin: 70px;
+        }
+        .field-value-list{
+            margin-bottom: 10px;
+        }
+        .field-value-list-left{
+            float: left;
+            width: 96px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .field-value-list-left .field-value{
+            display: block;
+            font-size: 14px;
+            text-align: right;
+            color: #333;
+        }
+        .field-value-list-right{
+            margin-left: 86px;
+            padding-left: 25px;
+            min-height: 30px;
+            line-height: 30px;
+            text-align: left;
+        }
+        .field-value-list-right .field-value{
+            display: inline-block;
+            margin-right: 10px;
+            min-height: 30px;
+            line-height: 30px;
+            vertical-align: top;
+            font-size: 12px;
+        }
+        .field-value-list-right .field-value select {
+            padding-left: 4px;
+            padding-right:4px;
+            width: 320px;
+            max-width: 320px;
+            height: 28px;
+            background-color: #f5f5f5;
+            border:1px solid #bbbbbb;
+            line-height: 20px;
+            font-size: 12px;
+            color:#333333;
+            vertical-align: top;
+        }
+        .field-value-list-right .field-value select:focus{
+            background-color: #fff;
+        }
+        .field-value-list-right span.form-item-false{
+            color:#e40000;
+        }
+        .field-value-list-right span.form-item-true{
+            display: none;
+        }
+        .field-value-list-left span i{
+            display: inline-block;
+            height: 30px;
+            width: 20px;
+            text-align: center;
+            line-height: 30px;
+            font-style: normal;
+            font-size: 14px;
+            color: #ff0000;
+        }
+        .field-value-list-left span i.asterisk{
+            width: 10px;
+            font-size: 12px;
+            line-height: 30px;
+        }
+		</style>
+		
+	</head>
+	
+	
+	
+	<body>
+		<div class="form-wrap">
+        <div class="field-value-list">
+            <p class="field-value-list-left"><span class="field-value"><i class="asterisk">*</i>行业选择：</span></p>
+            <div class="field-value-list-right">
+                <div class="field-value">
+                    <p>
+                        <select id="in_f" class="sel2-mul-not-null industry" name="in_f[]" data-next="in_s" multiple="multiple">
+                            
+                        </select>
+                        <span id="in_f_desc" class="check-result info-content-tip form-item-true">&nbsp;</span>
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <select id="in_s" class="sel2-mul-not-null industry" name="in_s[]" data-next="in_t" multiple="multiple">
+                            
+                        </select>
+                        <span id="in_s_desc" class="check-result info-content-tip form-item-true">&nbsp;</span>
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <select id="in_t" class="industry" name="in_t[]" multiple="multiple">
+                            
+                        </select>
+                        <span>非必填</span>
+                        <span id="in_t_desc" class="check-result info-content-tip form-item-true">&nbsp;</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+		
+		
+		
+	</body>
+	
+	
+	<script  src="js/jquery-1.12.2.min.js"></script>
+    <script src="https://cdn.bootcss.com/select2/4.0.6-rc.1/js/select2.full.min.js"></script>
+    <!-- 模板渲染引擎 -->
+    <!--<script  src="js/jsrender.js"></script>
+     <script type="text/x-jsrender" id="tp_sel">
+        {{for data}}
+            <option value="{{:id}}" title="{{:text}} [{{:id}}]">{{:text}}</option>
+        {{/for}}
+    </script>-->
+    <script>
+        var map = {
+            "in_f": [
+                {
+                    "id": 1,
+                    "text": "网络服务",
+                    "children": [
+                        {
+                            "id": 2,
+                            "text": "网络服务-资讯",
+                            "children": [
+                                {
+                                    "id": 3,
+                                    "text": "资讯-综合门户"
+                                },
+                                {
+                                    "id": 4,
+                                    "text": "资讯-汽车"
+                                },
+                                {
+                                    "id": 5,
+                                    "text": "资讯-房产"
+                                },
+                                {
+                                    "id": 6,
+                                    "text": "资讯-军事"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 11,
+                            "text": "网络服务-生活服务",
+                            "children": [
+                                
+                            ]
+                        },
+                        {
+                            "id": 13,
+                            "text": "网络服务-社交",
+                            "children": [
+                                {
+                                    "id": 14,
+                                    "text": "社交-休闲"
+                                },
+                                {
+                                    "id": 15,
+                                    "text": "社交-婚恋"
+                                },
+                                {
+                                    "id": 16,
+                                    "text": "社交-商务"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 35,
+                    "text": "游戏",
+                    "children": [
+                        {
+                            "id": 36,
+                            "text": "游戏-客户端",
+                            "children": [
+                                
+                            ]
+                        },
+                        {
+                            "id": 37,
+                            "text": "游戏-网页",
+                            "children": [
+                                
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 43,
+                    "text": "零售",
+                    "children": [
+                        {
+                            "id": 47,
+                            "text": "零售-垂直B2C",
+                            "children": [
+                                {
+                                    "id": 48,
+                                    "text": "垂直B2C-数码家电"
+                                },
+                                {
+                                    "id": 49,
+                                    "text": "垂直B2C-服装鞋帽"
+                                },
+                                {
+                                    "id": 50,
+                                    "text": "垂直B2C-食品饮料"
+                                },
+                                {
+                                    "id": 51,
+                                    "text": "垂直B2C-个护化妆"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 56,
+                            "text": "零售-票务平台",
+                            "children": [
+                                
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "in_s": [
+                
+            ],
+            "in_t": [
+                
+            ]
+        };
+
+        $(function () {
+            /* 多选 联动 */
+            var selectMod = {
+                initSelect: function ($target) { // 初始化
+                    $target.select2({
+                        placeholder: '请选择(可多选)', 
+                        language: {
+                            noResults: function() {
+                               return "暂无数据"
+                            }
+                        }
+                    });
+                },
+                editInitSelected: function ($target, val) {
+                    $target.val(val).trigger('change');
+                },
+                renderNext: function () { // 下拉多选联动
+                    var $this = $(this),
+                        cur = $this.attr('id'),
+                        curVal = $('#'+cur).val(),
+                        next = $this.data('next'),
+                        $next = $('#'+next),
+                        tp = $('#tp_sel'),
+                        curArr = map[cur] || [];
+                    if (curVal) {
+                        if (next && $next.length && curArr.length) {
+                            var arr = curArr.filter(function (obj) {
+                                if (curVal.indexOf(obj.id+'') != -1) {
+                                    return obj;
+                                }
+                            }).map(function (obj) {
+                                if (obj && obj.children && obj.children.length) {
+                                    return obj.children;
+                                }
+                            });
+                            map[next] = [].concat.apply([], arr); // 二维数组转换为一维数组
+                            $next.html(tp.render({data:map[next]})).change();
+                        }
+                    } else {
+                        if (next && $next.length) {
+                            $next.html(tp.render({data:map[next]})).change();
+                        }
+                    }
+                }
+            };
+
+            var industryMod = {
+                event: function () {
+                    $('body').on('change', '.industry', selectMod.renderNext);
+                },
+                init: function () {
+                    this.event();
+                    $('#in_f').html($('#tp_sel').render({data:map.in_f}));
+                    selectMod.initSelect($('#in_f, #in_s, #in_t'));
+                },
+                // 假如有回填信息，调用该方法即可
+                editInit: function () {
+                    // 回填信息，按照联动顺序，依次赋值
+                    var editInfo = {
+                        in_f: ['1'],
+                        in_s: ['2'],
+                        in_t: ['3', '4']
+                    };
+                    selectMod.editInitSelected($('#in_f'), editInfo.in_f);
+                    selectMod.editInitSelected($('#in_s'), editInfo.in_s);
+                    selectMod.editInitSelected($('#in_t'), editInfo.in_t);
+                }
+            };
+            industryMod.init();
+        })
+    </script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div>
+ <input type="radio" name="rd" class="same" value='选项二' >选项一
+ <input type="radio" name="rd" class="same" value='选项二'>选项二
+ <input type="radio" name="rd" class="same others" value='其它'>其它
+ <input type="text" name="txt" class="txt" value=""/> 
+</div>
+	</body>
+	
+	<script>
+		    $(function(){
+     
+        $(".same").click(function(){
+     
+           $(this).siblings().attr("checked",false);
+     
+           $(this).attr("checked",true);  
+     
+            if($(this).attr("class").indexOf('others')>=0){  
+     
+                $(this).siblings('.txt').show();
+            }
+            else{
+     
+                $(".others").siblings('.txt').hide();
+            }
+        });
+    })
+	</script>
+</html>
